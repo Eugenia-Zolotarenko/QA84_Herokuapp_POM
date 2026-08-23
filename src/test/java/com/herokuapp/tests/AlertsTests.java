@@ -6,6 +6,8 @@ import com.herokuapp.pages.alerts.AlertsPage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class AlertsTests extends TestBase {
     AlertsPage alerts;
@@ -17,22 +19,24 @@ public class AlertsTests extends TestBase {
 
     @Test
     public void jsAlert(){
-        alerts.getAlerts();
-        Assertions.assertTrue(alerts.isAlertPresent(5));
+        alerts.getAlerts().acceptAlert().verifyResult("You successfully clicked an alert");
+       // Assertions.assertTrue(alerts.isAlertPresent(5));
     }
 
-    @Test
-    public void jsConfirmOK(){
+    @ParameterizedTest
+    @ValueSource(strings = {"Ok","Cancel"})
+
+    public void jsConfirmOK(String option){
         alerts.getConfirm()
-                .clickOnResult("Ok")
-                .verifyResult("Ok");
+                .clickOnResult(option)
+                .verifyResult(option);
     }
-   @Test
-    public void jsConfirmCancel(){
-        alerts.getConfirm()
-                .clickOnResult("Cancel")
-                .verifyResult("Cancel");
-    }
+//   @Test
+//    public void jsConfirmCancel(){
+//        alerts.getConfirm()
+//                .clickOnResult("Cancel")
+//                .verifyResult("Cancel");
+//    }
 
     @Test
     public void jsPromptOk(){

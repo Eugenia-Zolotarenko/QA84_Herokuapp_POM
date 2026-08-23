@@ -61,6 +61,4 @@ public class AlertsPage extends BasePage {
         driver.switchTo().alert().sendKeys(text);
         return this;
     }
-
-
 }

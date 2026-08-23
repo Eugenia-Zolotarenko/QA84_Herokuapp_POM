@@ -58,6 +58,4 @@ public abstract class BasePage {
     public boolean isContainsText(String text, WebElement element) {
         return element.getText().contains(text);
     }
-
-
 }
