@@ -7,7 +7,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.stream.Stream;
 
 public class AlertsTests extends TestBase {
     AlertsPage alerts;
@@ -18,6 +22,12 @@ public class AlertsTests extends TestBase {
     }
 
     @Test
+    public void verifyAlertsPage(){
+        alerts.isPageTitleCorrect("JavaScript Alerts");
+    }
+
+
+    @Test
     public void jsAlert(){
         alerts.getAlerts().acceptAlert().verifyResult("You successfully clicked an alert");
        // Assertions.assertTrue(alerts.isAlertPresent(5));
@@ -26,7 +36,7 @@ public class AlertsTests extends TestBase {
     @ParameterizedTest
     @ValueSource(strings = {"Ok","Cancel"})
 
-    public void jsConfirmOK(String option){
+    public void jsConfirm(String option){
         alerts.getConfirm()
                 .clickOnResult(option)
                 .verifyResult(option);
@@ -38,17 +48,36 @@ public class AlertsTests extends TestBase {
 //                .verifyResult("Cancel");
 //    }
 
-    @Test
-    public void jsPromptOk(){
+    static Stream<Arguments> provideValuesForPromptAlert(){
+        return Stream.of(
+                Arguments.of("Test text", "Ok"),
+                Arguments.of("", "Ok")
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideValuesForPromptAlert")
+    public void jsPromptClickOnButtonOk(String text, String option){
         alerts.getPrompt()
-                .typeInAlert("Test text")
-                .clickOnResult("Ok")
-                .verifyResult("Test text");
-    }    @Test
-    public void jsPromptCancel(){
+                .typeInAlert(text)
+                .clickOnResult(option)
+                .verifyResult(text);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Test text",""})
+    public void jsPromptClickOnButtonCancel(String text){
         alerts.getPrompt()
-                .typeInAlert("Test text")
+                .typeInAlert(text)
                 .clickOnResult("Cancel")
                 .verifyResult("null");
     }
+    @Test
+    public void jsAlertTextTest() {
+        alerts
+                .getAlerts()
+                .verifyAlertText("I am a JS Alert")
+                .acceptAlert();
+    }
 }
+

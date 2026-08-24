@@ -2,6 +2,9 @@ package com.herokuapp.pages;
 
 import com.herokuapp.core.BasePage;
 import com.herokuapp.pages.alerts.AlertsPage;
+import com.herokuapp.pages.frames.FramesPage;
+import com.herokuapp.pages.frames.IFramePage;
+import com.herokuapp.pages.windows.WindowsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,4 +21,22 @@ public class HomePage extends BasePage {
         clickWithJS(alertsLink);
         return new AlertsPage(driver);
     }
+
+    @FindBy(css="a[href='/windows']")
+    WebElement windows;
+
+    public WindowsPage getWindowsPage(){
+        clickWithJS(windows);
+        return new WindowsPage(driver);
+    }
+
+    @FindBy(css="a[href='/frames']")
+    WebElement frames;
+
+    public FramesPage getFramesPage(){
+        clickWithJS(frames);
+        return new FramesPage(driver);
+    }
+
+
 }

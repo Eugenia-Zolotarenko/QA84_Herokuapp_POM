@@ -1,9 +1,11 @@
 package com.herokuapp.core;
 
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -57,5 +59,11 @@ public abstract class BasePage {
 
     public boolean isContainsText(String text, WebElement element) {
         return element.getText().contains(text);
+    }
+
+    @FindBy(css="h3")
+    WebElement h3;
+    public void isPageTitleCorrect(String title) {
+       Assertions.assertTrue(isContainsText(title, h3));
     }
 }
