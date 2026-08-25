@@ -22,7 +22,7 @@ public class AlertsTests extends TestBase {
     }
 
     @Test
-    public void verifyAlertsPage(){
+    public void verifyAlertsPageTitle(){
         alerts.isPageTitleCorrect("JavaScript Alerts");
     }
 

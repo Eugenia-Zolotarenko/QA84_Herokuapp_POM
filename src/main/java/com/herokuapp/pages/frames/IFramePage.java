@@ -14,13 +14,6 @@ public class IFramePage extends BasePage {
         super(driver);
     }
 
-
-
-//    public IFramePage switchToFrameById() {
-//        System.out.println(iFramesList.size());
-//        return this;
-//    }
-
     @FindBy(id = "tinymce")
     WebElement textArea;
 
@@ -35,6 +28,7 @@ public class IFramePage extends BasePage {
         driver.switchTo().frame(iframe);
         return this;
     }
+
 }
 
 

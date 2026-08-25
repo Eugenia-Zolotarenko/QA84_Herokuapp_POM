@@ -38,5 +38,22 @@ public class HomePage extends BasePage {
         return new FramesPage(driver);
     }
 
+    @FindBy(css="a[href='/dropdown']")
+    WebElement dropdown;
+
+    public DropDownPage getDropDownPage(){
+        clickWithJS(dropdown);
+        return new DropDownPage(driver);
+    }
+
+    @FindBy(css="a[href='/hovers']")
+    WebElement hovers;
+
+    public HoversPage getHoversPage(){
+        clickWithJS(hovers);
+        return new HoversPage(driver);
+    }
+
+
 
 }

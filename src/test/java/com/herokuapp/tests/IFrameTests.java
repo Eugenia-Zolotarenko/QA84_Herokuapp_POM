@@ -25,9 +25,8 @@ public class IFrameTests extends TestBase {
 
     @Test
     public void iframeTextTest() {
-        iFrame
-                .switchToIFrame()
-                .verifyText("Your content goes here.");
+        iFrame.switchToIFrame()
+              .verifyText("Your content goes here.");
     }
 }
 
