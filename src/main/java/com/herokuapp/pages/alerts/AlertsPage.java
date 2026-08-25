@@ -67,7 +67,6 @@ public class AlertsPage extends BasePage {
 
         softly.assertThat(expectedText.equals(actualText));
         softly.assertAll();
-
        // Assertions.assertEquals(expectedText, actualText);
         return this;
     }

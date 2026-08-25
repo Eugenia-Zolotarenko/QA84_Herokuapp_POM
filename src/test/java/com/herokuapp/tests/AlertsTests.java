@@ -54,19 +54,21 @@ public class AlertsTests extends TestBase {
 
     static Stream<Arguments> provideValuesForPromptAlert(){
         return Stream.of(
-                Arguments.of("Test text", "Ok"),
-                Arguments.of("", "Ok")
+                Arguments.of("Test text", "Ok", "Test text"),
+                Arguments.of("", "Ok" , ""),
+                Arguments.of("", "Cancel" , "null"),
+                Arguments.of("Test text", "Cancel" , "null")
         );
     }
 
     @ParameterizedTest
     @MethodSource("provideValuesForPromptAlert")
-    public void jsPromptClickOnButtonOk(String text, String option){
+    public void jsPromptClickOnButtonOk(String text, String option, String resultText){
         alerts.getPrompt()
                 .typeInAlert(text)
                 .verifyAlertText("I am a JS prompt")
                 .clickOnResult(option)
-                .verifyResult(text);
+                .verifyResult(resultText);
     }
 
     @ParameterizedTest
