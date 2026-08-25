@@ -1,5 +1,6 @@
 package com.herokuapp.core;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,11 +16,13 @@ import java.time.Duration;
 public abstract class BasePage {
     protected WebDriver driver;
     public static JavascriptExecutor js;
+    public static SoftAssertions softly;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
         js =(JavascriptExecutor) driver;
+        softly = new SoftAssertions();
     }
 
     public void scrollWithJS(WebElement element){

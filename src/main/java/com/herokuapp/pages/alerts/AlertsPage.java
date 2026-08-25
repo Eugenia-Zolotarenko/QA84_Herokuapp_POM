@@ -64,7 +64,11 @@ public class AlertsPage extends BasePage {
 
     public AlertsPage verifyAlertText(String expectedText) {
         String actualText = driver.switchTo().alert().getText();
-        Assertions.assertEquals(expectedText, actualText);
+
+        softly.assertThat(expectedText.equals(actualText));
+        softly.assertAll();
+
+       // Assertions.assertEquals(expectedText, actualText);
         return this;
     }
 

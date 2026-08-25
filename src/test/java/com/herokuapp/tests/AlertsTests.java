@@ -29,7 +29,10 @@ public class AlertsTests extends TestBase {
 
     @Test
     public void jsAlert(){
-        alerts.getAlerts().acceptAlert().verifyResult("You successfully clicked an alert");
+        alerts.getAlerts()
+                .verifyAlertText("I am a JS Alert")
+                .acceptAlert()
+                .verifyResult("You successfully clicked an alert");
        // Assertions.assertTrue(alerts.isAlertPresent(5));
     }
 
@@ -38,6 +41,7 @@ public class AlertsTests extends TestBase {
 
     public void jsConfirm(String option){
         alerts.getConfirm()
+                .verifyAlertText("I am a JS Confirm")
                 .clickOnResult(option)
                 .verifyResult(option);
     }
@@ -60,6 +64,7 @@ public class AlertsTests extends TestBase {
     public void jsPromptClickOnButtonOk(String text, String option){
         alerts.getPrompt()
                 .typeInAlert(text)
+                .verifyAlertText("I am a JS prompt")
                 .clickOnResult(option)
                 .verifyResult(text);
     }
@@ -72,12 +77,11 @@ public class AlertsTests extends TestBase {
                 .clickOnResult("Cancel")
                 .verifyResult("null");
     }
-    @Test
-    public void jsAlertTextTest() {
-        alerts
-                .getAlerts()
-                .verifyAlertText("I am a JS Alert")
-                .acceptAlert();
-    }
+//    @Test
+//    public void jsAlertTextTest() {
+//        alerts.getAlerts()
+//              .verifyAlertText("I am a JS Alert")
+//              .acceptAlert();
+//    }
 }
 
