@@ -54,6 +54,14 @@ public class HomePage extends BasePage {
         return new HoversPage(driver);
     }
 
+    @FindBy(css="a[href='/horizontal_slider']")
+    WebElement slider;
+
+    public SliderPage getSliderPage(){
+        clickWithJS(slider);
+        return new SliderPage(driver);
+    }
+
 
 
 }
