@@ -1,25 +1,21 @@
 package com.herokuapp.core;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.time.Duration;
-
-public class TestBase {
-    protected WebDriver driver;
+public class TestBase{
     String browser;
+    public static final Logger logger = LoggerFactory.getLogger(TestBase.class);
+    protected WebDriver driver;
+    protected ApplicationManager app = new ApplicationManager(System.getProperty("browser", "chrome"));
 
 
     @BeforeEach
     public void init(){
-        driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/");
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        driver = app.start();
 //        if(browser.equalsIgnoreCase("chrome")) {
 //            WebDriverManager.chromedriver().setup();
 //            driver = new ChromeDriver();
@@ -31,4 +27,10 @@ public class TestBase {
 //            driver = new EdgeDriver();
 //        }
     }
+
+    @AfterEach
+    public void tearDown(){
+        app.stop();
+    }
+
 }

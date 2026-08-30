@@ -62,6 +62,14 @@ public class HomePage extends BasePage {
         return new SliderPage(driver);
     }
 
+    @FindBy(css="a[href='/drag_and_drop']")
+    WebElement dragAndDrop;
+
+    public DragAndDropPage getDragAndDropPage(){
+        clickWithJS(dragAndDrop);
+        return new DragAndDropPage(driver);
+    }
+
 
 
 }
