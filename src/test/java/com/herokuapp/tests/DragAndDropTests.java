@@ -25,8 +25,15 @@ public class DragAndDropTests extends TestBase {
     }
 
     @Test
-    public void dragAndDropTest(){
-        dragAndDrop.dragElement();
-
+    public void changeElementsTest(){
+        dragAndDrop.changeElement();
+    }
+    @Test
+    public void changeElementsTwiceTest(){
+        dragAndDrop.changeElementTwice();
+    }
+    @Test
+    public void changeElementsWithXYTest(){
+        dragAndDrop.changeElementWithXY();
     }
 }

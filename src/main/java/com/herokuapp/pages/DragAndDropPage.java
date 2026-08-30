@@ -1,6 +1,7 @@
 package com.herokuapp.pages;
 
 import com.herokuapp.core.BasePage;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -25,12 +26,41 @@ public class DragAndDropPage extends BasePage {
         return this;
     }
 
-    public DragAndDropPage dragElement() {
-        for (WebElement element: draggableElements){
-            actions.dragAndDropBy(element, 250, 100).perform();
-        }
+    @FindBy(id="column-a")
+    WebElement elementA;
+    @FindBy(id="column-b")
+    WebElement elementB;
+    @FindBy(css="#columns>.column>header")
+    WebElement first;
+
+    public DragAndDropPage changeElement() {
+        actions.dragAndDrop(elementB,elementA).perform();
+        Assertions.assertEquals("B", first.getText());
         return this;
     }
 
+    public DragAndDropPage changeElementTwice() {
+        actions.dragAndDrop(elementB,elementA).perform();
+        actions.dragAndDrop(elementB,elementA).perform();
+        Assertions.assertEquals("A", first.getText());
+        return this;
+    }
 
+    public DragAndDropPage changeElementWithXY() {
+        actions.dragAndDropBy(elementA, 250, 0).perform();
+        Assertions.assertEquals("B", first.getText());
+        return this;
+    }
 }
+
+
+//        actions .moveToElement(elementB)
+//                .pause(3000)  // Даем сайту заметить наведение мыши
+//                .clickAndHold(elementB)
+//                .pause(300)  // Имитируем удержание
+//                .moveByOffset(2, 2)             // Микро-рывок, чтобы сработал триггер dragstart!
+//                .moveToElement(elementA)
+//                .pause(3000)  // Даем сайту понять, что мы над целью
+//                .release()
+//                .perform();
+//actions.dragAndDropBy(elementA, 250, 0).perform();

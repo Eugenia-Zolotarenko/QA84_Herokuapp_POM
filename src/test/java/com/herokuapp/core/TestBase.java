@@ -28,9 +28,9 @@ public class TestBase{
 //        }
     }
 
-    @AfterEach
-    public void tearDown(){
-        app.stop();
-    }
+//    @AfterEach
+//    public void tearDown(){
+//        app.stop();
+//    }
 
 }
