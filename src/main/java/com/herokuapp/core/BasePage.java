@@ -10,6 +10,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.Duration;
 
 public abstract class BasePage {
@@ -94,6 +97,24 @@ public abstract class BasePage {
             Thread.sleep(millis);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    protected void verifyLinks(String url) {
+        try {
+            URL linkUrl = new URL(url);
+            HttpURLConnection connection =(HttpURLConnection) linkUrl
+                    .openConnection();
+            connection.setConnectTimeout(5000);
+            connection.connect();
+            int statusCode = connection.getResponseCode();
+
+            if(statusCode >= 400) {
+                softly.fail(url + " --> " + connection.getResponseMessage() + " is a BROKEN link");
+            } else
+                softly.assertThat(statusCode).isLessThan(400);
+        } catch (IOException e) {
+            softly.fail(url + " --> " + "ERROR occurred");
         }
     }
 }

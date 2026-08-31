@@ -70,6 +70,14 @@ public class HomePage extends BasePage {
         return new DragAndDropPage(driver);
     }
 
+    @FindBy(css="a[href='/broken_images']")
+    WebElement brokenImg;
+
+    public BrokenImgPage getBrokenImgPage(){
+        clickWithJS(brokenImg);
+        return new BrokenImgPage(driver);
+    }
+
 
 
 }
