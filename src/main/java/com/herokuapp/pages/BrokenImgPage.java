@@ -24,5 +24,4 @@ public class BrokenImgPage extends BasePage {
         softly.assertAll();
         return this;
     }
-
 }
